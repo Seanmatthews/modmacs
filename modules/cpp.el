@@ -126,7 +126,3 @@
 (add-hook 'c++-mode-hook 'fix-enum-class)
 
 
-(use-package color-theme-sanityinc-tomorrow
-  :ensure t
-  :init)
-(load-theme 'sanityinc-tomorrow-night t)

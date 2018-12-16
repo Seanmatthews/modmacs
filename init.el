@@ -42,6 +42,16 @@
                                          nil))
                                    load-path))))))
 
+;; Setup use-package
+;; Setup use-package
+(eval-when-compile
+  (require 'use-package))
+(use-package bind-key
+  :ensure t)
+;; so we can (require 'use-package) even in compiled emacs to e.g. read docs
+(use-package use-package
+  :commands use-package-autoload-keymap)
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; By default Emacs triggers garbage collection at ~0.8MB which makes
 ;; startup really slow. Since most systems have at least 64MB of memory,

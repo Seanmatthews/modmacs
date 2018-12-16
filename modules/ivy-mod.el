@@ -5,7 +5,7 @@
   :ensure t
   :commands (ivy-mode)
   :config
-  (require 'ivy)
+;  (require 'ivy)
   (ivy-mode t)
   (setq ivy-use-virtual-buffers t)
   (setq enable-recursive-minibuffers t)

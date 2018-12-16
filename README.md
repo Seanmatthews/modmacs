@@ -11,14 +11,14 @@ Above all else, _ModMacs_ aims to be:
 At the end of the day, _ModMacs_ does very little, and that's the goal-- _ModMacs_ should do everything necessary to achieve these simple objectives, and nothing more.
 
 ## Features
-###_Current:_
+### _Current:_
 
 * Fast load
 * Drop-in custom, user-created modules 
 * White/blacklist for toggling your modules
 * A set of core emacs convenience functions
 
-###_To Be Released_
+### _To Be Released_
 
 * Package collision checking
 * Key binding collision checking

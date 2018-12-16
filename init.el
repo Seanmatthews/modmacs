@@ -5,6 +5,7 @@
 (load-file "~/.emacs.d/core-settings.el")
 (load-file "~/.emacs.d/util.el")
 
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Set packages to install
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -43,7 +44,6 @@
                                    load-path))))))
 
 ;; Setup use-package
-;; Setup use-package
 (eval-when-compile
   (require 'use-package))
 (use-package bind-key
@@ -51,6 +51,7 @@
 ;; so we can (require 'use-package) even in compiled emacs to e.g. read docs
 (use-package use-package
   :commands use-package-autoload-keymap)
+
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; By default Emacs triggers garbage collection at ~0.8MB which makes
@@ -61,8 +62,6 @@
                                ;; restore after startup
                                (setq gc-cons-threshold 800000)))
 
-;; Extra plugins and config files are stored here
-;; (add-to-list 'load-path (expand-file-name "~/.emacs.d/plugins"))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Start emacs server if not already running
@@ -86,7 +85,6 @@
 (setq modmacs-loaded-modules (set-difference modmacs-whitelist modmacs-blacklist :test #'equal))
 (dolist (mod modmacs-loaded-modules) (load mod))
 
-;(load-directory "~/.emacs.d/modules") ;
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Post-init section -- DO NOT PLACE ANYTHING AFTER
@@ -95,5 +93,4 @@
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; END
-
 

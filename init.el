@@ -1,3 +1,10 @@
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Load modmacs essential, non-user files
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(load-file "~/.emacs.d/core-settings.el")
+(load-file "~/.emacs.d/util.el")
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Set packages to install
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -55,31 +62,28 @@
     (server-start))
 
 
-(defun load-directory (dir)
-      (let ((load-it (lambda (f)
-		       (load-file (concat (file-name-as-directory dir) f)))
-		     ))
-	(mapc load-it (directory-files dir nil "\\.el$"))))
-
-(load-directory "~/.emacs.d/modules")
-
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(package-selected-packages
-   (quote
-	(autopair use-package modern-cpp-font-lock ivy flycheck fill-column-indicator color-theme-sanityinc-tomorrow clang-format))))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )
-
-
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; Load general settings
+;; Load modules
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-(load-file "~/.emacs.d/settings.el")
+(require 'cl)
+(setq modmacs-mods-dir "~/.emacs.d/modules")
+(load-file "~/.emacs.d/modules.el") ; loads whitelist and blacklist
+(add-to-list 'load-path "~/.emacs.d/modules")
+
+; Load blacklist and whitelist, then find the difference & load remaining modules.
+(setq modmacs-whitelist (expand-mods-list modmacs-whitelist modmacs-mods-dir))
+(setq modmacs-blacklist (expand-mods-list modmacs-blacklist modmacs-mods-dir))
+(setq modmacs-loaded-modules (set-difference modmacs-whitelist modmacs-blacklist :test #'equal))
+(dolist (mod modmacs-loaded-modules) (load mod))
+
+;(load-directory "~/.emacs.d/modules") ;
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Post-init section -- DO NOT PLACE ANYTHING AFTER
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(load-file "~/.emacs.d/keybindings.el")
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; END
+
+

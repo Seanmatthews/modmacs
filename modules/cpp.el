@@ -82,22 +82,12 @@
   (add-hook 'c++-mode-hook 'fci-mode)
   )
 
-
-(use-package ivy
-             :ensure t
-             :commands (ivy-mode)
-             :config
-             (require 'ivy)
-             (ivy-mode t)
-             (setq ivy-use-virtual-buffers t)
-             (setq enable-recursive-minibuffers t)
-             (setq ivy-wrap t)
-             (global-set-key (kbd "C-c C-r") 'ivy-resume)
-             (setq ivy-count-format "%d/%d ")
-             )
-
-;; The way too long hack for properly indenting `enum class`
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Enum indetation
+;;
+;; The way too long hack for properly indenting `enum class`.
 ;; http://stackoverflow.com/questions/6497374/emacs-cc-mode-indentation-problem-with-c0x-enum-class
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (defun inside-class-enum-p (pos)
   "Checks if the POS is within the braces of a C++ enum class"
   (ignore-errors

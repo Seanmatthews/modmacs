@@ -116,3 +116,24 @@
 (add-hook 'c++-mode-hook 'fix-enum-class)
 
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Switch between .c/.cpp .h/.hpp files with Alt-o
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(defvar my-cpp-other-file-alist
+  '(("\\.cpp\\'" (".hpp" ".h"))
+    ("\\.ipp\\'" (".hpp" ".cpp"))
+    ("\\.hpp\\'" (".ipp" ".cpp"))
+    ("\\.cxx\\'" (".hxx" ".ixx"))
+    ("\\.ixx\\'" (".cxx" ".hxx"))
+    ("\\.hxx\\'" (".ixx" ".cxx"))
+    ("\\.c\\'" (".h"))
+    ("\\.h\\'" (".c" ".cpp"))
+    ))
+
+(setq-default ff-other-file-alist 'my-cpp-other-file-alist)
+(setq ff-search-directories
+    (directory-files-recursively  default-directory "" t))
+
+(add-hook 'c-initialization-hook
+		  (lambda () (define-key c-mode-base-map [(meta o)] 'ff-get-other-file))
+		  )
